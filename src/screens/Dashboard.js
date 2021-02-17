@@ -8,10 +8,9 @@ import Button from '../components/Button'
 const Dashboard = ({ navigation }) => (
   <Background>
     <Logo />
-    <Header>Let’s start</Header>
+    <Header>Test APPS</Header>
     <Paragraph>
-      Your amazing app starts here. Open you favorite code editor and start
-      editing this project.
+      Nama = Achmad winadi.ini home
     </Paragraph>
     <Button
       mode="outlined"

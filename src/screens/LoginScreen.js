@@ -13,16 +13,16 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import LoginHelper from '../helpers/LoginHelper'
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState([])
+  const [password, setPassword] = useState([])
 
   const onLoginPressed = async () => {
 
-    const emailError = emailValidator(email.value)
-    const passwordError = passwordValidator(password.value)
-
+    // const emailError = emailValidator(email.value)
+    // const passwordError = passwordValidator(password.value)
+    console.log(email, "datamni")
     let result = await LoginHelper(email, password);
-    if (result.code == 1) {
+    if (result.status_code == 200) {
 
       navigation.reset({
         index: 0,
@@ -41,22 +41,20 @@ const LoginScreen = ({ navigation }) => {
       <Logo />
       <Header>Welcome back.</Header>
       <TextInput
-        label="Email"
+        label="Username"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+
       />
       <TextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry

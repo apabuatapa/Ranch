@@ -15,24 +15,25 @@ import { ScrollView } from 'react-native-gesture-handler'
 import register from '../helpers/register'
 
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState({})
-  const [phone, setPhone] = useState({})
-  const [id_type, setId_type] = useState({})
-  const [id_number, setId_number] = useState({})
-  const [referral_code, setReferral_code] = useState({})
-  const [email, setEmail] = useState({})
-  const [password, setPassword] = useState({})
+  const [name, setName] = useState([])
+  const [phone, setPhone] = useState([])
+  const [id_type, setId_type] = useState([])
+  const [id_number, setId_number] = useState([])
+  const [referral_code, setReferral_code] = useState([])
+  const [email, setEmail] = useState([])
+  const [password, setPassword] = useState([])
+  const [kodeReferal, setKodeReferal] = useState([])
 
   const onSignUpPressed = async () => {
-    const nameError = nameValidator(name.value)
-    const emailError = emailValidator(email.value)
+
     let result = await register(name, phone, email, id_type, id_number, referral_code, password);
-    const passwordError = passwordValidator(password.value)
-    if (result.code == 1) {
+    console.log(result, 'tessss')
+    if (result.status_code == 200) {
 
       navigation.reset({
         index: 0,
         routes: [{ name: 'Dashboard' }],
+
       })
     } else {
       Alert.alert(`Error Code: ${result.code}`, `${result.message}`);
@@ -51,7 +52,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Name"
         returnKeyType="next"
         value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
+        onChangeText={(text) => setName(text)}
         error={!!name.error}
         errorText={name.error}
       />
@@ -59,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -71,7 +72,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Phone"
         returnKeyType="next"
         value={phone.value}
-        onChangeText={(text) => setPhone({ value: text, error: '' })}
+        onChangeText={(text) => setPhone(text)}
         error={!!phone.error}
         errorText={phone.error}
       />
@@ -79,7 +80,7 @@ const RegisterScreen = ({ navigation }) => {
         label="Id Type"
         returnKeyType="next"
         value={id_type.value}
-        onChangeText={(text) => setId_type({ value: text, error: '' })}
+        onChangeText={(text) => setId_type(text)}
         error={!!id_type.error}
         errorText={id_type.error}
       />
@@ -87,16 +88,23 @@ const RegisterScreen = ({ navigation }) => {
         label="Id number"
         returnKeyType="next"
         value={id_number.value}
-        onChangeText={(text) => setId_number({ value: text, error: '' })}
+        onChangeText={(text) => setId_number(text)}
         error={!!id_number.error}
         errorText={id_number.error}
       />
-
+      <TextInput
+        label="Referal code"
+        returnKeyType="next"
+        value={kodeReferal.value}
+        onChangeText={(text) => setReferral_code(text)}
+        error={!!kodeReferal.error}
+        errorText={kodeReferal.error}
+      />
       <TextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry

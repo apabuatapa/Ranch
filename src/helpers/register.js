@@ -1,27 +1,27 @@
 import { urlRegister } from './GlobalUrl';
 
 const register = async (name, phone, email, id_type, id_number, referral_code, password) => {
+    const formdata = new URLSearchParams();
 
+    formdata.append('name', name)
+    formdata.append('phone', phone)
+    formdata.append('email', email)
+    formdata.append('id_type', id_type)
+    formdata.append('id_number', id_number)
+    formdata.append('referral_code', referral_code)
+    formdata.append('password', password)
+    console.log(formdata, '========data')
 
-    console.log(formdata,
-        '================ini');
     try {
-        let formdata = new FormData();
-        formdata.append('name', name)
-        formdata.append('phone', phone)
-        formdata.append('email', email)
-        formdata.append('id_type', id_type)
-        formdata.append('id_number', id_number)
-        formdata.append('referral_code', '0101010101')
-        formdata.append('password', password)
+
         let response = await fetch(urlRegister, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
-                "Content-Type": "multipart/form-data",
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             },
             redirect: 'follow',
-            body: formdata
+            body: formdata.toString()
         });
         let data = await response.json();
         console.log(data, 'korewa data');

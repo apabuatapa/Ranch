@@ -22,7 +22,7 @@ const TextInput = ({ errorText, description, ...props }) => (
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginVertical: 8,
+    marginVertical: 2,
   },
   input: {
     backgroundColor: theme.colors.surface,

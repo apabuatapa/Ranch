@@ -1,21 +1,22 @@
 import { urlLogin } from './GlobalUrl';
 
 const LoginHelper = async (username, password) => {
-    console.log(urlLogin, username, password, '================ini');
 
+    const formData = new URLSearchParams();
+
+    formData.append('barcode', username);
+    formData.append('password', password);
+    console.log(formData, '======anjing=======sadasd===ini');
     try {
+
         let response = await fetch(urlLogin, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             },
             redirect: 'follow',
-            body: JSON.stringify({
-                username: username,
-                password: password,
-
-            }),
+            body: formData.toString(),
         });
         let data = await response.json();
         console.log(data, 'korewa data');
